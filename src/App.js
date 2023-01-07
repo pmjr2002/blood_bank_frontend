@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import './App.css'
+import LoginPage from './pages/LoginPage/LoginPage'
+import PrivateRoutes from './utils/PrivateRoutes'
+import HospitalPages from './pages/HospitalPages/HospitalPages'
+import {AuthProvider} from './context/AuthContext'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <AuthProvider>
+        <Routes>
+          <Route path = '/' element = {<LoginPage/>}/>
+          <Route element = {<PrivateRoutes/>}>
+            <Route path='/hospital/:username/*' element={<HospitalPages/>}/>
+          </Route>
+        </Routes>
+      </AuthProvider>
+
+    </>
+  )
 }
 
-export default App;
+export default App
