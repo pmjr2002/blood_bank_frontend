@@ -35,9 +35,9 @@ export const AuthProvider = ({children}) => {
             setUser(decode)
             localStorage.setItem('authTokens', JSON.stringify(data))
             if(decode.id[0] === 'H')
-                navigate(`/hospital/${decode.id}`)
+                navigate(`/hospital/${decode.id}/`)
             else
-                navigate(`/staff/${decode.id}`)
+                navigate(`/staff/${decode.id}/`)
         }else{
             alert(`Error: ${response.status}`)
         }

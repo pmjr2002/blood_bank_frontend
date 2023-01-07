@@ -4,6 +4,7 @@ import './App.css'
 import LoginPage from './pages/LoginPage/LoginPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import HospitalPages from './pages/HospitalPages/HospitalPages'
+import StaffPages from './pages/StaffPages/StaffPages'
 import {AuthProvider} from './context/AuthContext'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route element = {<PrivateRoutes/>}>
             <Route path='/hospital/:username/*' element={<HospitalPages/>}/>
           </Route>
+          <Route path = '/staff//*' element = {<StaffPages/>}/>
         </Routes>
       </AuthProvider>
 
