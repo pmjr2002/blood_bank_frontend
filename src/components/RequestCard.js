@@ -1,14 +1,15 @@
-import { Card, CardContent } from '@mui/material'
+import {Box, Card, CardContent, Button } from '@mui/material'
 import React from 'react'
 
 function RequestCard(props) {
   const style = {
     container: {
-      width: 300,
-      height: 200,
+      width: 350,
+      height: 250,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
+      
     },
     innerContainer: {
       margin: 0,
@@ -41,6 +42,18 @@ function RequestCard(props) {
           <p style = {style.item}>Blood Component: {props.blood_component}</p>
           <p style = {style.item}>Quantity: {props.quantity}</p>
         </div>
+        <Box textAlign = 'center' sx = {{marginTop: 2}}>
+          {props.status === 'success' ? 
+          <Button 
+            variant = 'text' 
+            sx = {{color: 'green'}} 
+            >Successful</Button> 
+          : <Button
+              variant = 'outlined'
+              onClick = {() => {}}>
+            Pending
+            </Button>}
+        </Box>
       </CardContent>
     </Card>
   )

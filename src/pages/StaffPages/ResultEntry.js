@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 
 import {Autocomplete, 
   Paper, Box,TextField,Button, ListItemText, List, ListItem } from '@mui/material'
@@ -8,12 +8,31 @@ import AuthContext from '../../context/AuthContext'
 function ResultEntry() {
   const {user} = useContext(AuthContext)
   const {authTokens} = useContext(AuthContext)
-  const [data, setData] = useState([])
 
+  const [donors, setDonors] = useState([])
 
+  useEffect(() =>{
+    async function fetchData(){
+      const response = await fetch('http://localhost:8000/donors/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }})
+      if(response.status === 200){
+        const data = await response.json()
+        setDonors(data)
+      }
+      else
+        console.log("Error " + response.status + " : " + response.statusText)
+    }
+    fetchData()
+  }, [])
+
+  let donor_id_list = donors.map((donor) => (donor.donor_id))
   const items = [
-    {text: 'Occasion', options: ['Normal', 'Emergency']},
+    {text:'Donor ID',options: donor_id_list},
     {text: 'Blood Group', options: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
+    {text: 'Occasion', options: ['Normal', 'Emergency']},
     {text:'Result',options:['Positive','Negative']}
   ]
 
@@ -23,14 +42,15 @@ function ResultEntry() {
     let data1 = document.getElementsByTagName('input')[0].value
     let data2 = document.getElementsByTagName('input')[1].value
     let data3 = document.getElementsByTagName('input')[2].value
+    let data4 = document.getElementsByTagName('input')[3].value
 
-    if(data1 === '' || data2 === '' || data3 === ''){
+    if(data1 === '' || data2 === '' || data3 === '',data4 === ''){
       alert('Please fill all the fields')
       return
     }
 
 
-    fetch('http://localhost:8000/requests', {
+    fetch('http://localhost:8000/donations/', {
       method: 'POST',
       headers: {
       'content-type': 'application/json',
@@ -38,9 +58,10 @@ function ResultEntry() {
       },
       body:JSON.stringify({
         'staff_id': user.id,
-        'patient_case': data1,
+        'donor_id': data1,
         'blood_group': data2,
-        'blood_component': data3,
+        'donation_occasion': data3,
+        'result': data4
       })
     })
     

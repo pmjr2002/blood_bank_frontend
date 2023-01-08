@@ -43,7 +43,6 @@ function DonorModal() {
     let name = document.getElementsByTagName('input')[2].value
     let gender = document.getElementsByTagName('input')[3].value
     let dob = document.getElementsByTagName('input')[4].value
-    console.log(document.getElementsByTagName('input')[4].value.toString.length)
     let blood_group = document.getElementsByTagName('input')[5].value
     let phone = document.getElementsByTagName('input')[6].value
     let address = document.getElementsByTagName('input')[7].value
@@ -67,7 +66,8 @@ function DonorModal() {
         'phone': phone,
         'address': address
       })
-			})
+})
+	handleClose()
   }
 
 

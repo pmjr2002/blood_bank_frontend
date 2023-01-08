@@ -31,7 +31,8 @@ function Status() {
   const style = {
     container: {
       display: 'flex',
-      justifyContent: 'start',
+      justifyContent: 'center',
+      alignItems: 'center',
       flexWrap: 'wrap',
       padding: '2em',
       gap: '1.5em',
@@ -48,6 +49,7 @@ function Status() {
             blood_group = {request.blood_group}
             blood_component = {request.blood_component}
             quantity = {request.quantity}
+            status = {request.status}
           />
         ))}
     </div>
