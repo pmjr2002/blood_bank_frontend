@@ -1,13 +1,19 @@
-import { Drawer, List, ListItemButton,ListItemText, Box } from '@mui/material'
-import React from 'react'
+import React, {useContext} from 'react'
+import { Drawer, List, ListItemButton,ListItemText, Box, Button } from '@mui/material'
 import { useNavigate,Route, Routes } from 'react-router-dom'
 
 import Donors from './Donors'
 import PendingRequests from './PendingRequests'
 import ResultEntry from './ResultEntry'
 
+import AuthContext from '../../context/AuthContext'
+
 function StaffPages() {
-  const drawerWidth = 240
+
+  let {user} = useContext(AuthContext)
+	let {logout} = useContext(AuthContext)
+	
+	const drawerWidth = 240
 	
 	const navigate = useNavigate()
 
@@ -31,15 +37,15 @@ function StaffPages() {
 	let items = [
 		{
 			text: 'Donors',
-			path: '/staff/',
+			path: `/staff/${user.id}`,
 		},
 		{
 			text: 'Result Entry',
-			path: '/staff/result-entry/',
+			path: `/staff/${user.id}/result-entry/`,
 		},
 		{
 			text: 'Pending Requests',
-			path: '/staff/pending-requests/',
+			path: `/staff/${user.id}/pending-requests/`,
 		}
 	]
 
@@ -72,6 +78,13 @@ function StaffPages() {
 							</ListItemButton>
 						))}
 					</List>
+				<Box textAlign = 'center'>
+					<Button 
+						variant = 'contained' 
+						sx = {{minWidth: 50,backgroundColor: 'purple', '&:hover': {backgroundColor: 'purple'}}}
+						onClick = {logout}
+						>Logout</Button>
+				</Box>
 				</Drawer>
 				<Routes>
 					<Route path = '/' element = {<Donors/>}/>

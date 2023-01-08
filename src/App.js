@@ -15,8 +15,8 @@ function App() {
           <Route path = '/' element = {<LoginPage/>}/>
           <Route element = {<PrivateRoutes/>}>
             <Route path='/hospital/:username/*' element={<HospitalPages/>}/>
+            <Route path = '/staff/:username/*' element = {<StaffPages/>}/>
           </Route>
-          <Route path = '/staff//*' element = {<StaffPages/>}/>
         </Routes>
       </AuthProvider>
 
