@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Autocomplete, 
   Paper, Box,TextField,Button, Modal, ListItemText, List, ListItem } from '@mui/material'
 import dayjs from 'dayjs'
@@ -6,7 +6,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
+import AuthContext from '../../context/AuthContext'
+
 function DonorModal() {
+	const {authTokens} = useContext(AuthContext)
+
 	const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)

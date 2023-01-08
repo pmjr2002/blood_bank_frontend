@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {Autocomplete, Paper, TextField,Button} from '@mui/material'
+import {Autocomplete, Paper, TextField,Button, Accordion,AccordionSummary, AccordionDetails} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import AuthContext from '../../context/AuthContext'
 import DonorModal from './DonorModal'
@@ -40,8 +41,7 @@ function Donors() {
 
     
     if(response.status === 200){
-      let data = response.json()
-      console.log(data)
+      let data = await response.json()
       setDonors(data)
     }
     else
@@ -69,7 +69,20 @@ function Donors() {
       alignItems: 'center',
       padding: '1em'
     },
-    
+    accordion:{
+      container: {
+        padding: '3em',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      item:{
+        width: '40%',
+        padding: '0.5em',
+      }
+    }
   }
 
   return (
@@ -112,7 +125,24 @@ function Donors() {
             >Search</Button>
       </Paper>
     </div>
-    <div></div>
+    <div style = {style.accordion.container} >
+      {donors.length !== 0 && donors.map((donor) =>  (
+          <Accordion style = {style.accordion.item}>
+            <AccordionSummary
+              expandIcon = {<ExpandMoreIcon />}
+              id = {donor.donor_id}>
+              <h2>{donor.name} <span style = {{color: 'grey'}}>#{donor.donor_id}</span></h2>
+            </AccordionSummary>
+            <AccordionDetails>
+              <h4>Phone Number: {donor.phone}</h4>
+              <h4>Date of Birth: {donor.dob}</h4>
+              <h4>Blood Group: {donor.blood_group}</h4>
+              <h4>Address: {donor.address}</h4>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+
+    </div>
     <DonorModal/>
   </div>
   )
