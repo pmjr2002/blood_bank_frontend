@@ -38,7 +38,7 @@ function RequestCard(props) {
           <p style = {style.item}>Hospital ID: {props.hospital_id}</p>
           <p style = {style.item}>Patient Case: {props.case_type}</p>
           <p style = {style.item}>Blood Group: {props.blood_group}</p>
-          <p style = {style.item}>Blood Component: {props.blood_group}</p>
+          <p style = {style.item}>Blood Component: {props.blood_component}</p>
           <p style = {style.item}>Quantity: {props.quantity}</p>
         </div>
       </CardContent>

@@ -44,7 +44,7 @@ function Status() {
           <RequestCard
             request_id = {request.request_id}
             hospital_id = {request.hospital_id}
-            case_type = {request.case_type}
+            case_type = {request.patient_case}
             blood_group = {request.blood_group}
             blood_component = {request.blood_component}
             quantity = {request.quantity}

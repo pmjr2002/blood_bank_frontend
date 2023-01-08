@@ -4,7 +4,7 @@ import {Paper, List, ListItem, ListItemText,Autocomplete,TextField, Button,Box} 
 
 function Request() {
 
-	const {user} = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
   const {authTokens} = useContext(AuthContext)
   const [data, setData] = useState([])
 
@@ -98,36 +98,36 @@ function Request() {
     <div style = {style.main}>
         <h1 style={style.heading}>Welcome {data.name} #{data.hospital_id}</h1>
         <Paper elevation = {12} style = {style.paper}>
-					<form onSubmit={(e) => handleSubmit(e)}>
-					<h1 style = {style.formHeading}>Request details</h1>
-					<div>
-						<List>
-							{items.map((item) => (
-								<ListItem key = {item.text}>
-									<ListItemText primary = {item.text} />
-									<Autocomplete
-										id = {String(item.text).trim()}
-										options = {item.options}
-										sx = {{width: 300}}
-										renderInput = {(params) =>
-											<TextField {...params}
-											label = {item.text}
-											id = {item.text.trim()}
-											sx = {
-												{"& .MuiOutlinedInput-root": {
-													"&.Mui-focused fieldset": {
-														borderColor: "pink",
-													}
-												}}}/>}
-									/>
-								</ListItem>
-							))}
-							</List>
-					</div>
-						<Box textAlign = 'center'>
-							<Button variant = "contained" type = 'submit' style = {style.submitBtn}>Submit</Button>
-						</Box>
-				</form>
+				<form onSubmit={(e) => handleSubmit(e)}>
+				<h1 style = {style.formHeading}>Request details</h1>
+				<div>
+					<List>
+						{items.map((item) => (
+							<ListItem key = {item.text}>
+								<ListItemText primary = {item.text} />
+								<Autocomplete
+									id = {String(item.text).trim()}
+									options = {item.options}
+									sx = {{width: 300}}
+									renderInput = {(params) =>
+										<TextField {...params}
+										label = {item.text}
+										id = {item.text.trim()}
+										sx = {
+											{"& .MuiOutlinedInput-root": {
+												"&.Mui-focused fieldset": {
+													borderColor: "pink",
+												}
+											}}}/>}
+								/>
+							</ListItem>
+						))}
+						</List>
+				</div>
+					<Box textAlign = 'center'>
+						<Button variant = "contained" type = 'submit' style = {style.submitBtn}>Submit</Button>
+					</Box>
+			</form>
         </Paper>
     </div>
   )

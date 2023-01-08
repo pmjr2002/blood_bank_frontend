@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import { AppBar, Box, Button} from '@mui/material'
 import { NavLink, Route, Routes } from 'react-router-dom'
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism'
 
 import Request from './Request'
 import Status from './Status'
@@ -27,6 +28,13 @@ function HospitalPages() {
     },
     heading: {
       color: 'black',
+      padding: '0 0.25em',
+    },
+    'left': {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     right: {
       display: 'flex',
@@ -62,7 +70,8 @@ function HospitalPages() {
     <div style={style.hospMain}>
       <Box sx={{flexGrow: 1}}>
         <AppBar position="sticky" style = {style.appbar}>
-          <div>
+          <div style = {style.left}>
+            <VolunteerActivismIcon fontSize = 'large' style = {{color: 'purple'}}/>
             <h1 style = {style.heading}>Blood Bank</h1>
           </div>
           <div style = {style.right}>

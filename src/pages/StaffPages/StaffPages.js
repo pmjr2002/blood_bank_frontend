@@ -1,4 +1,4 @@
-import { Drawer, List, ListItem,ListItemText, Box } from '@mui/material'
+import { Drawer, List, ListItemButton,ListItemText, Box } from '@mui/material'
 import React from 'react'
 import { useNavigate,Route, Routes } from 'react-router-dom'
 
@@ -18,7 +18,14 @@ function StaffPages() {
 		heading: {
 			textAlign: 'center',
 			padding: '0.5em 0',
-		}
+		},
+		listItem: {
+			textAlign: 'center',
+		},
+		listItemActive: {
+			color: 'black',
+			backgroundColor: 'white',
+		},
 	}
 
 	let items = [
@@ -38,7 +45,7 @@ function StaffPages() {
 
 
 	return (
-    <>
+    <div style = {{backgroundColor: '#e4e4e4',minHeight: '100vh'}}>
 			<Box sx = {{display: 'flex'}}>
 				<Drawer
 					sx={{
@@ -56,12 +63,13 @@ function StaffPages() {
 					<h1 style = {style.heading}>Staff Panel</h1>
 					<List>
 						{items.map((item) => (
-							<ListItem
+							<ListItemButton
 							key = {item.text}
+							selected = {window.location.pathname === item.path}
 							onClick = {() => navigate(item.path)}
 							>
-								<ListItemText primary = {item.text} style = {{textAlign: 'center'}}/>
-							</ListItem>
+								<ListItemText primary = {item.text} style = {style.listItem	}/>
+							</ListItemButton>
 						))}
 					</List>
 				</Drawer>
@@ -71,7 +79,7 @@ function StaffPages() {
 					<Route path = '/pending-requests' element = {<PendingRequests/>}/>
 				</Routes>
 			</Box>
-    </>
+    </div>
   )
 }
 
