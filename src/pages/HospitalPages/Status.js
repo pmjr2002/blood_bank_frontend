@@ -6,12 +6,12 @@ import AuthContext from '../../context/AuthContext'
 function Status() {
   const {user} = useContext(AuthContext)
 
-  const [requests, setRequests] = useState([])
+  const [pendingRequests, setPendingRequests] = useState([])
+  const [successfulRequests, setSuccessfulRequests] = useState([])
 
   useEffect(() => {
-    console.log(user.id)
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:8000/requests/${user.id}`,{
+      const response = await fetch(`http://localhost:8000/requests/pending_request/${user.id}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -20,7 +20,26 @@ function Status() {
 
       if(response.status === 200){
         const data = await response.json()
-        setRequests(data)
+        setPendingRequests(data)
+      }
+      else
+        console.log("Error " + response.status + " : " + response.statusText)
+    }
+    fetchData()
+  },[user.id])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:8000/requests/successful_request/${user.id}`,{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if(response.status === 200){
+        const data = await response.json()
+        setSuccessfulRequests(data)
       }
       else
         console.log("Error " + response.status + " : " + response.statusText)
@@ -29,7 +48,14 @@ function Status() {
   },[user.id])
   
   const style = {
-    container: {
+    container:{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      paddingTop: '2em'
+    },
+    subContainer: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -40,18 +66,41 @@ function Status() {
   
   return (
     <div style = {style.container}>
-      {requests.length !== 0 && 
-        requests.map((request) =>(
-          <RequestCard
-            request_id = {request.request_id}
-            hospital_id = {request.hospital_id}
-            case_type = {request.patient_case}
-            blood_group = {request.blood_group}
-            blood_component = {request.blood_component}
-            quantity = {request.quantity}
-            status = {request.status}
-          />
-        ))}
+      <div>
+        <h1 style = {{textAlign: 'center'}}>Pending Requests</h1>
+        <div style = {style.subContainer}>
+          {pendingRequests.length !== 0 &&
+            pendingRequests.map((request) =>(
+              <RequestCard
+                request_id = {request.request_id}
+                hospital_id = {request.hospital_id}
+                case_type = {request.patient_case}
+                blood_group = {request.blood_group}
+                blood_component = {request.blood_component}
+                quantity = {request.quantity}
+                status = {request.status}
+              />
+            ))}
+        </div>
+      </div>
+      <div>
+        <h1 style = {{textAlign: 'center'}}>Successful Requests</h1>
+        <div style = {style.subContainer}>
+          {successfulRequests.length !== 0 &&
+            successfulRequests.map((request) =>(
+              <RequestCard
+                request_id = {request.request_id}
+                hospital_id = {request.hospital_id}
+                case_type = {request.patient_case}
+                blood_group = {request.blood_group}
+                blood_component = {request.blood_component}
+                quantity = {request.quantity}
+                status = {request.status}
+              />
+            ))}
+        </div>
+      </div>
+      
     </div>
   )
 }

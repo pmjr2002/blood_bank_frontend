@@ -34,7 +34,7 @@ function Request() {
 		{text: 'Case Type', options: ['Accident', 'Surgery','Malaria','Anaemia']},
 		{text: 'Blood Group', options: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
 		{text:'Blood Component',options:['Platelets','Plasma','Power Red','Whole Blood']},
-		{text:'Quantity',options:['1','2','3','4','5','6','7','8','9','10']}
+		{text:'Quantity',options:['1','2','3','4','5']}
 	]
 
 	const [open, setOpen] = useState(false)
@@ -60,8 +60,6 @@ function Request() {
   }, [])
 
 	const handleSubmit = () => {
-		console.log('Entering submit')
-
 		fetch('http://localhost:8000/requests/', {
 			method: 'POST',
 			headers: {
@@ -76,7 +74,7 @@ function Request() {
 				'quantity': params[3]
 			})
 		})
-		
+		handleClose()
 	}
 	const handleBillGeneration = (e) => {
 		e.preventDefault()

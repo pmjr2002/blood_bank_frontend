@@ -74,9 +74,10 @@ function Donors() {
         padding: '3em',
         width: '100%',
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '1.5em'
       },
       item:{
         width: '40%',
@@ -127,19 +128,19 @@ function Donors() {
     </div>
     <div style = {style.accordion.container} >
       {donors.length !== 0 && donors.map((donor) =>  (
-          <Accordion style = {style.accordion.item}>
-            <AccordionSummary
-              expandIcon = {<ExpandMoreIcon />}
-              id = {donor.donor_id}>
-              <h2>{donor.name} <span style = {{color: 'grey'}}>#{donor.donor_id}</span></h2>
-            </AccordionSummary>
-            <AccordionDetails>
-              <h4>Phone Number: {donor.phone}</h4>
-              <h4>Date of Birth: {donor.dob}</h4>
-              <h4>Blood Group: {donor.blood_group}</h4>
-              <h4>Address: {donor.address}</h4>
-            </AccordionDetails>
-          </Accordion>
+            <Accordion style = {style.accordion.item}>
+              <AccordionSummary
+                expandIcon = {<ExpandMoreIcon />}
+                id = {donor.donor_id}>
+                <h2>{donor.name} <span style = {{color: 'grey'}}>#{donor.donor_id}</span></h2>
+              </AccordionSummary>
+              <AccordionDetails>
+                <h4>Phone Number: {donor.phone}</h4>
+                <h4>Date of Birth: {donor.dob}</h4>
+                <h4>Blood Group: {donor.blood_group}</h4>
+                <h4>Address: {donor.address}</h4>
+              </AccordionDetails>
+            </Accordion>
         ))}
 
     </div>

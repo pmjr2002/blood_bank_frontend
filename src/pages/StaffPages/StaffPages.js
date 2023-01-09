@@ -5,6 +5,7 @@ import { useNavigate,Route, Routes } from 'react-router-dom'
 import Donors from './Donors'
 import PendingRequests from './PendingRequests'
 import ResultEntry from './ResultEntry'
+import RepositoryTable from './RepositoryTable'
 
 import AuthContext from '../../context/AuthContext'
 
@@ -46,6 +47,10 @@ function StaffPages() {
 		{
 			text: 'Pending Requests',
 			path: `/staff/${user.id}/pending-requests/`,
+		},
+		{
+			text: 'Repository',
+			path: `/staff/${user.id}/repository/`
 		}
 	]
 
@@ -90,6 +95,7 @@ function StaffPages() {
 					<Route path = '/' element = {<Donors/>}/>
 					<Route path = '/result-entry' element = {<ResultEntry/>}/>
 					<Route path = '/pending-requests' element = {<PendingRequests/>}/>
+					<Route path = '/repository' element = {<RepositoryTable/>}/>
 				</Routes>
 			</Box>
     </div>

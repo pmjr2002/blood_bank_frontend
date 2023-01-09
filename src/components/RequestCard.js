@@ -2,6 +2,10 @@ import {Box, Card, CardContent, Button } from '@mui/material'
 import React from 'react'
 
 function RequestCard(props) {
+  let handlePendingClick = () => {
+    fetch(`http://localhost:8000/requests/pending_request_process/${props.request_id}`)
+  }
+
   const style = {
     container: {
       width: 350,
@@ -43,14 +47,16 @@ function RequestCard(props) {
           <p style = {style.item}>Quantity: {props.quantity}</p>
         </div>
         <Box textAlign = 'center' sx = {{marginTop: 2}}>
-          {props.status === 'success' ? 
-          <Button 
-            variant = 'text' 
-            sx = {{color: 'green'}} 
-            >Successful</Button> 
+          {props.status === 'Success' ? 
+          <h2 
+            style = {
+              {textAlign:'center', 
+              color: 'green',
+              textTransform: 'uppercase'}}
+            >Successful</h2> 
           : <Button
               variant = 'outlined'
-              onClick = {() => {}}>
+              onClick = {() => handlePendingClick()}>
             Pending
             </Button>}
         </Box>
