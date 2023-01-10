@@ -1,15 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Autocomplete, Paper, TextField,Button, Accordion,AccordionSummary, AccordionDetails} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-import AuthContext from '../../context/AuthContext'
 import DonorModal from './DonorModal'
 
 function Donors() {
-  const {user} = useContext(AuthContext)
-  const {authTokens} = useContext(AuthContext)
-
   const [addresses, setAddresses] = useState([])
   const [donors, setDonors] = useState([])
 

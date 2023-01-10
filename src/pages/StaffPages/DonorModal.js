@@ -8,6 +8,8 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 import AuthContext from '../../context/AuthContext'
 
+import {toast} from 'react-toastify'
+
 function DonorModal() {
 	const {authTokens} = useContext(AuthContext)
 
@@ -37,7 +39,7 @@ function DonorModal() {
     fetchData()
   }, [])
 
-	let handleSubmit = (e) => {
+	let handleSubmit = async(e) => {
     e.preventDefault()
 
     let name = document.getElementsByTagName('input')[2].value
@@ -48,11 +50,20 @@ function DonorModal() {
     let address = document.getElementsByTagName('input')[7].value
 
     if(name === '' || gender === '' || dob === '' || blood_group === '' || phone === '' || address === ''){
-      alert("Please fill all the fields")
+      toast.warn('Please enter all the fields', {
+				position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
       return
     }
 
-    fetch('http://localhost:8000/donors', {
+    let response = await fetch('http://localhost:8000/donors', {
       method: 'POST',
       headers: {
       'content-type': 'application/json',
@@ -67,7 +78,44 @@ function DonorModal() {
         'address': address
       })
 })
-	handleClose()
+	
+	if(response.status === 201){
+		toast.success("Donor Created Successfully",{
+			position: "top-center",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		})
+		handleClose()
+	}
+	else if(response.status === 400){
+		toast.warn('Invalid phone number or donor already exists',{
+			position: "top-center",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		})
+	}
+	else{
+		toast.error("Error " + response.status + " : " + response.statusText,{
+			position: "top-center",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		})
+	}
   }
 
 

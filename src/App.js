@@ -7,6 +7,9 @@ import HospitalPages from './pages/HospitalPages/HospitalPages'
 import StaffPages from './pages/StaffPages/StaffPages'
 import {AuthProvider} from './context/AuthContext'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 function App() {
   return (
     <>
@@ -18,6 +21,7 @@ function App() {
             <Route path = '/staff/:username/*' element = {<StaffPages/>}/>
           </Route>
         </Routes>
+        <ToastContainer />
       </AuthProvider>
 
     </>

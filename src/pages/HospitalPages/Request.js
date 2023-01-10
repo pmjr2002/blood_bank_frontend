@@ -1,6 +1,7 @@
 import React,{useContext, useState, useEffect} from 'react'
 import AuthContext from '../../context/AuthContext'
 import {Paper, List, ListItem, ListItemText,Autocomplete,TextField, Button,Box, Modal} from '@mui/material'
+import {toast} from 'react-toastify'
 
 function Request() {
 
@@ -59,8 +60,8 @@ function Request() {
     fetchData()
   }, [])
 
-	const handleSubmit = () => {
-		fetch('http://localhost:8000/requests/', {
+	const handleSubmit = async() => {
+		let response = await fetch('http://localhost:8000/requests/', {
 			method: 'POST',
 			headers: {
 			'content-type': 'application/json',
@@ -74,8 +75,36 @@ function Request() {
 				'quantity': params[3]
 			})
 		})
+
+		if(response.status === 201){
+			toast.success('Request generated successfully',{
+				position: 'top-center',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'light',
+			})
 		handleClose()
 	}
+	
+		if(response.status === 400){
+			toast.error(response.statusText,{
+				position: 'top-center',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'light',
+			})
+		}
+
+}
+
 	const handleBillGeneration = (e) => {
 		e.preventDefault()
 

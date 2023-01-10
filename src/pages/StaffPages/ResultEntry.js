@@ -5,6 +5,8 @@ import {Autocomplete,
 
 import AuthContext from '../../context/AuthContext'
 
+import {toast} from 'react-toastify'
+
 function ResultEntry() {
   const {user} = useContext(AuthContext)
   const {authTokens} = useContext(AuthContext)
@@ -36,7 +38,7 @@ function ResultEntry() {
     {text:'Result',options:['Positive','Negative']}
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     
     let data1 = document.getElementsByTagName('input')[0].value
@@ -45,12 +47,21 @@ function ResultEntry() {
     let data4 = document.getElementsByTagName('input')[3].value
 
     if(data1 === '' || data2 === '' || data3 === '',data4 === ''){
-      alert('Please fill all the fields')
+      toast.warn('Please enter all the fields', {
+				position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				})
       return
     }
 
 
-    fetch('http://localhost:8000/donations/', {
+    let response = await fetch('http://localhost:8000/donations/', {
       method: 'POST',
       headers: {
       'content-type': 'application/json',
@@ -64,7 +75,30 @@ function ResultEntry() {
         'result': data4
       })
     })
-    
+
+    if(response.status === 201){
+      toast.success('Result added successfully', {
+        position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+      })}
+    if(response.status === 400){
+      toast.error('Blood group entered does not match donor blood group',{
+        position: "top-center",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+      })
+    }
   }
 
 		const style = {

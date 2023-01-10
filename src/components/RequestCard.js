@@ -1,10 +1,58 @@
 import {Box, Card, CardContent, Button } from '@mui/material'
 import React from 'react'
 
+import {toast} from 'react-toastify'
+
 function RequestCard(props) {
-  let handlePendingClick = () => {
-    fetch(`http://localhost:8000/requests/pending_request_process/${props.request_id}`)
+  let handlePendingClick = async() => {
+    let response = await fetch(`http://localhost:8000/requests/pending_request_process/${props.request_id}`)
     
+    if(response.status === 200){
+      toast.success('Blood request #' + props.request_id + ' successful!',{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })}
+    else if(response.status === 400){
+      toast.error('Blood request #' + props.request_id + ' failed!',{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })}
+    else if(response.status === 404){
+      toast.error('Blood group not found',{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+    }
+    else{
+      toast.error('Error ' + response.status + ' : ' + response.statusText,{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+    }
   }
 
   const style = {
