@@ -126,7 +126,7 @@ function DonorModal() {
 				<Paper elevation = {12} style = {style.main}>
 					<form onSubmit = {(e) => handleSubmit(e)}>
 						<h1 style = {style.heading}>Enter Details</h1>
-							<List>
+							<List style = {{padding: '0.5em 1.5em'}}>
 								<ListItem id = {1}>
 									<ListItemText
 										primary = 'Name'

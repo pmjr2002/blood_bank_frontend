@@ -4,6 +4,7 @@ import React from 'react'
 function RequestCard(props) {
   let handlePendingClick = () => {
     fetch(`http://localhost:8000/requests/pending_request_process/${props.request_id}`)
+    
   }
 
   const style = {

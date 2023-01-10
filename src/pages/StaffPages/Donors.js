@@ -37,6 +37,8 @@ function Donors() {
     let locality = document.getElementsByTagName('input')[0].value
     let blood_group = document.getElementsByTagName('input')[1].value 
     
+    if(blood_group.slice(-1) === '+')
+      blood_group = blood_group.replace('+','P')
     let response = await fetch(`http://127.0.0.1:8000/donors/?locality=${locality}&blood_group=${blood_group}`)
 
     
