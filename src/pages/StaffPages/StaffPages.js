@@ -9,31 +9,27 @@ import RepositoryTable from './RepositoryTable'
 
 import AuthContext from '../../context/AuthContext'
 
+const style = {
+	drawer: {
+		backgroundColor: 'pink',
+	},
+	heading: {
+		textAlign: 'center',
+		padding: '0.5em 0',
+	},
+	listItem: {
+		textAlign: 'center',
+	},
+	listItemActive: {
+		color: 'black',
+		backgroundColor: 'white',
+	},
+}
+
 function StaffPages() {
 
   let {user} = useContext(AuthContext)
 	let {logout} = useContext(AuthContext)
-	
-	const drawerWidth = 240
-	
-	const navigate = useNavigate()
-
-	const style = {
-		drawer: {
-			backgroundColor: 'pink',
-		},
-		heading: {
-			textAlign: 'center',
-			padding: '0.5em 0',
-		},
-		listItem: {
-			textAlign: 'center',
-		},
-		listItemActive: {
-			color: 'black',
-			backgroundColor: 'white',
-		},
-	}
 
 	let items = [
 		{
@@ -54,6 +50,9 @@ function StaffPages() {
 		}
 	]
 
+	const drawerWidth = 240
+	
+	const navigate = useNavigate()
 
 	return (
     <div style = {{backgroundColor: '#e4e4e4',minHeight: '100vh'}}>

@@ -5,6 +5,43 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import DonorModal from './DonorModal'
 
+const style = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '1em',
+    width: '100%',
+  },
+  searchContainer: {
+    width: '80%',
+  },
+  paper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '1em'
+  },
+  accordion:{
+    container: {
+      padding: '3em',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      gap: '1.5em'
+    },
+    item:{
+      width: '40%',
+      padding: '0.5em',
+    }
+  }
+}
+
+
 function Donors() {
   const [addresses, setAddresses] = useState([])
   const [donors, setDonors] = useState([])
@@ -44,44 +81,6 @@ function Donors() {
     }
     else
       alert("Error " + response.status + " : " + response.statusText)
-  }
-
-  
-
-  const style = {
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '1em',
-      width: '100%',
-    },
-    searchContainer: {
-      width: '80%',
-    },
-    paper: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '1em'
-    },
-    accordion:{
-      container: {
-        padding: '3em',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '1.5em'
-      },
-      item:{
-        width: '40%',
-        padding: '0.5em',
-      }
-    }
   }
 
   return (

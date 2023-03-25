@@ -7,6 +7,37 @@ import AuthContext from '../../context/AuthContext'
 
 import {toast} from 'react-toastify'
 
+const style = {
+  main: {
+    width: '100%',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    gap: 15,
+  },
+  paper: {
+    width: '80%',
+  },
+  heading: {
+    textAlign: 'center',
+    marginBottom: '1em',
+  },
+  formHeading: {
+    textAlign: 'center',
+    width: '100%',
+    backgroundColor: 'purple',
+    color: 'white',
+    padding: '0.25em 0'
+  },
+  submitBtn: {
+    backgroundColor: 'purple', 
+    color: 'white',
+    width: 200,
+    marginBottom: 30,
+  }}
+
 function ResultEntry() {
   const {user} = useContext(AuthContext)
   const {authTokens} = useContext(AuthContext)
@@ -101,37 +132,6 @@ function ResultEntry() {
     }
   }
 
-		const style = {
-			main: {
-        width: '100%',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: 15,
-			},
-			paper: {
-        width: '80%',
-			},
-			heading: {
-				textAlign: 'center',
-				marginBottom: '1em',
-			},
-			formHeading: {
-				textAlign: 'center',
-				width: '100%',
-				backgroundColor: 'purple',
-				color: 'white',
-				padding: '0.25em 0'
-			},
-			submitBtn: {
-				backgroundColor: 'purple', 
-				color: 'white',
-				width: 200,
-				marginBottom: 30,
-			}}
-		
   return (
     <div style = {style.main}>
       <h1>Staff ID: {user.id}</h1>

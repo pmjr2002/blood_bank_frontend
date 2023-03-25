@@ -2,6 +2,36 @@ import React,{useState, useEffect} from 'react'
 
 import {Paper, Table, TableBody,TableCell, TableContainer, TableHead,TableRow} from '@mui/material'
 
+const style = {
+  main: {
+    width: '100%',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  paper: {
+    width: '80%',
+  },
+  heading: {
+    fontSize: '3em',
+    padding: '0.2em 0',
+    color: 'white',
+    backgroundColor: 'purple',
+    textTransform: 'uppercase',
+    width: '100%',
+    textAlign: 'center',
+  },
+  tableHeading: {
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+  },
+  tableContent: {
+    fontWeight: 'bold',
+  }
+}
+
 function RepositoryTable() {
 	const [blood, setBlood] = useState([])
 
@@ -21,36 +51,6 @@ function RepositoryTable() {
     }
     fetchData()
   }, [])
-
-  const style = {
-    main: {
-      width: '100%',
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-    },
-    paper: {
-      width: '80%',
-    },
-    heading: {
-      fontSize: '3em',
-      padding: '0.2em 0',
-      color: 'white',
-      backgroundColor: 'purple',
-      textTransform: 'uppercase',
-      width: '100%',
-      textAlign: 'center',
-    },
-    tableHeading: {
-      fontSize: '1.5em',
-      fontWeight: 'bold',
-    },
-    tableContent: {
-      fontWeight: 'bold',
-    }
-  }
 
   return (
     <div style = {style.main}>

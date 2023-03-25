@@ -2,6 +2,34 @@ import React, {useState, useEffect} from 'react'
 
 import RequestCard from '../../components/RequestCard'
 
+const style = {
+  container: {
+    padding: '2em',
+    width: '100%',
+    minHeight: '100vh'
+  },
+  mainHeading:{
+    fontSize: '3em',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingBottom: '1em',
+  },
+  outerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  subContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: '2em',
+    gap: '1.5em',
+}
+}
+
 function PendingRequests() {
   
   const [hospitals,setHospitals] = useState([])
@@ -40,34 +68,6 @@ function PendingRequests() {
     }
     fetchData()
   }, [])
-
-  const style = {
-    container: {
-      padding: '2em',
-      width: '100%',
-      minHeight: '100vh'
-    },
-    mainHeading:{
-      fontSize: '3em',
-      fontWeight: 'bold',
-      textAlign: 'center',
-      paddingBottom: '1em',
-    },
-    outerContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    subContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      padding: '2em',
-      gap: '1.5em',
-  }
-}
 
   return(
     <div style = {style.container}>

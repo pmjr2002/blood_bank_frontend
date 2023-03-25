@@ -3,6 +3,23 @@ import RequestCard from '../../components/RequestCard'
 
 import AuthContext from '../../context/AuthContext'
 
+const style = {
+  container:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    paddingTop: '2em'
+  },
+  subContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: '2em',
+    gap: '1.5em',
+}}
+
 function Status() {
   const {user} = useContext(AuthContext)
 
@@ -46,23 +63,6 @@ function Status() {
     }
     fetchData()
   },[user.id])
-  
-  const style = {
-    container:{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-      paddingTop: '2em'
-    },
-    subContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      padding: '2em',
-      gap: '1.5em',
-  }}
   
   return (
     <div style = {style.container}>

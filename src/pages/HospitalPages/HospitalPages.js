@@ -8,63 +8,64 @@ import Status from './Status'
 
 import AuthContext from '../../context/AuthContext'
 
+const style = {
+  hospMain: {
+    backgroundColor: '#e4e4e4',
+    minHeight: '100vh',
+  },
+  appbar: {
+    backgroundColor: 'pink',
+    height: '3em',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0 1em',
+  },
+  heading: {
+    color: 'black',
+    padding: '0 0.25em',
+  },
+  'left': {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  right: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  navLinks: {
+    display: 'flex',
+    flexDirection: 'row',
+    listStyle: 'none',
+    alignItems: 'center',
+  },
+  navLinksLi: {
+    paddingRight: '1em',
+    },
+  navLinksA: {
+    textDecoration: 'none',
+    color: 'black',
+  },
+  navLinksAActive: {
+    textDecoration: 'none',
+    color: 'black',
+    borderBottom: '3px solid purple',
+    borderRadius: '1px',
+    fontWeight: 'bold',
+  },
+  logoutBtn:{
+    backgroundColor: 'purple', 
+    color: 'white',
+  }
+}
+
 function HospitalPages() {
   let {user} = useContext(AuthContext)
   let {logout} = useContext(AuthContext)
 
-  const style = {
-    hospMain: {
-      backgroundColor: '#e4e4e4',
-      minHeight: '100vh',
-    },
-    appbar: {
-      backgroundColor: 'pink',
-      height: '3em',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '0 1em',
-    },
-    heading: {
-      color: 'black',
-      padding: '0 0.25em',
-    },
-    'left': {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    right: {
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
-    navLinks: {
-      display: 'flex',
-      flexDirection: 'row',
-      listStyle: 'none',
-      alignItems: 'center',
-    },
-    navLinksLi: {
-      paddingRight: '1em',
-      },
-    navLinksA: {
-      textDecoration: 'none',
-      color: 'black',
-    },
-    navLinksAActive: {
-      textDecoration: 'none',
-      color: 'black',
-      borderBottom: '3px solid purple',
-      borderRadius: '1px',
-      fontWeight: 'bold',
-    },
-    logoutBtn:{
-      backgroundColor: 'purple', 
-			color: 'white',
-    }
-  }
   
   return (
     <div style={style.hospMain}>

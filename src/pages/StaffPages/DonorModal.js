@@ -10,6 +10,52 @@ import AuthContext from '../../context/AuthContext'
 
 import {toast} from 'react-toastify'
 
+const style = {
+	main: {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		width: '80%'
+	},
+	heading:{
+		textAlign: 'center',
+		width: '100%',
+		backgroundColor: 'purple',
+		color: 'white',
+		padding: '0.25em 0'
+	},
+	btnBox:{
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		gap: 5,
+	},
+	submitBtn:{
+		backgroundColor: 'purple',
+		margin : '0 1 em'
+	},
+	cancelBtn:{
+		backgroundColor: 'red',
+		margin : '0 1 em'
+	},
+	inputBox: {
+		width: 300,
+		"& .MuiOutlinedInput-root": {
+			"&.Mui-focused fieldset": {
+				borderColor: "pink",
+		}},
+	},
+	createBtn:{
+		backgroundColor: 'purple',
+		position: 'fixed',
+		right: '3em',
+		bottom: '3em',
+	},
+}
+
+
 function DonorModal() {
 	const {authTokens} = useContext(AuthContext)
 
@@ -117,52 +163,6 @@ function DonorModal() {
 		})
 	}
   }
-
-
-	const style = {
-		main: {
-			position: 'absolute',
-			top: '50%',
-			left: '50%',
-			transform: 'translate(-50%, -50%)',
-			width: '80%'
-		},
-		heading:{
-			textAlign: 'center',
-			width: '100%',
-			backgroundColor: 'purple',
-			color: 'white',
-			padding: '0.25em 0'
-		},
-		btnBox:{
-			display: 'flex',
-			flexDirection: 'row',
-			justifyContent: 'space-between',
-			alignItems: 'center',
-			gap: 5,
-		},
-		submitBtn:{
-			backgroundColor: 'purple',
-			margin : '0 1 em'
-		},
-		cancelBtn:{
-			backgroundColor: 'red',
-			margin : '0 1 em'
-		},
-		inputBox: {
-			width: 300,
-			"& .MuiOutlinedInput-root": {
-				"&.Mui-focused fieldset": {
-					borderColor: "pink",
-			}},
-		},
-		createBtn:{
-      backgroundColor: 'purple',
-      position: 'fixed',
-      right: '3em',
-      bottom: '3em',
-    },
-	}
 
   return (
     <div>

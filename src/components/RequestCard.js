@@ -3,6 +3,35 @@ import React from 'react'
 
 import {toast} from 'react-toastify'
 
+const style = {
+  container: {
+    width: 350,
+    height: 250,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    
+  },
+  innerContainer: {
+    margin: 0,
+    padding: 0,
+  },
+  heading: {
+    color: 'white',
+    backgroundColor: 'purple',
+    padding:'0.25em 0.75em',
+    textAlign: 'center',
+  },
+  item:{
+    textAlign: 'center',
+    padding: '0.25em 0.75em',
+    fontWeight: 'bold',
+  },
+  itemContainer: {
+    paddingTop: '0.75em',
+  }
+}
+
 function RequestCard(props) {
   let handlePendingClick = async() => {
     let response = await fetch(`http://localhost:8000/requests/pending_request_process/${props.request_id}`)
@@ -55,34 +84,6 @@ function RequestCard(props) {
     }
   }
 
-  const style = {
-    container: {
-      width: 350,
-      height: 250,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      
-    },
-    innerContainer: {
-      margin: 0,
-      padding: 0,
-    },
-    heading: {
-      color: 'white',
-      backgroundColor: 'purple',
-      padding:'0.25em 0.75em',
-      textAlign: 'center',
-    },
-    item:{
-      textAlign: 'center',
-      padding: '0.25em 0.75em',
-      fontWeight: 'bold',
-    },
-    itemContainer: {
-      paddingTop: '0.75em',
-    }
-  }
   
   return (
     <Card style = {style.container} elevation = {10}>

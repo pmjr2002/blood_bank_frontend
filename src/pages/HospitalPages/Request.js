@@ -3,6 +3,60 @@ import AuthContext from '../../context/AuthContext'
 import {Paper, List, ListItem, ListItemText,Autocomplete,TextField, Button,Box, Modal} from '@mui/material'
 import {toast} from 'react-toastify'
 
+const items = [
+	{text: 'Case Type', options: ['Accident', 'Surgery','Malaria','Anaemia']},
+	{text: 'Blood Group', options: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
+	{text:'Blood Component',options:['Platelets','Plasma','Power Red','Whole Blood']},
+	{text:'Quantity',options:['1','2','3','4','5']}
+]
+
+const style = {
+	main: {
+		padding: '3em 0'
+	},
+	paper: {
+		width: '70%',
+		margin: '0 auto',
+	},
+	heading: {
+		textAlign: 'center',
+		marginBottom: '1em',
+	},
+	formHeading: {
+		textAlign: 'center',
+		width: '100%',
+		backgroundColor: 'purple',
+		color: 'white',
+		padding: '0.25em 0'
+	},
+	submitBtn: {
+		backgroundColor: 'purple', 
+		color: 'white',
+		width: 200,
+		marginBottom: 30,
+	},
+	billModal:{
+		main: {
+			position: 'absolute',
+			top: '50%',
+			left: '50%',
+			transform: 'translate(-50%, -50%)',
+			width: '80%'
+		},
+		heading:{
+			textAlign: 'center',
+			width: '100%',
+			backgroundColor: 'purple',
+			color: 'white',
+			padding: '0.25em 0'
+		},
+		item:{
+			textAlign: 'center',
+			padding: '1em 0'
+		}
+	}
+}
+
 function Request() {
 
   const {user} = useContext(AuthContext)
@@ -28,15 +82,6 @@ function Request() {
     }
     fetchData()
   }, [user.id, authTokens.access_token])
-
-
-
-	const items = [
-		{text: 'Case Type', options: ['Accident', 'Surgery','Malaria','Anaemia']},
-		{text: 'Blood Group', options: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
-		{text:'Blood Component',options:['Platelets','Plasma','Power Red','Whole Blood']},
-		{text:'Quantity',options:['1','2','3','4','5']}
-	]
 
 	const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -130,52 +175,6 @@ function Request() {
 		handleOpen()
 	}
 
-		const style = {
-			main: {
-				padding: '3em 0'
-			},
-			paper: {
-				width: '70%',
-				margin: '0 auto',
-			},
-			heading: {
-				textAlign: 'center',
-				marginBottom: '1em',
-			},
-			formHeading: {
-				textAlign: 'center',
-				width: '100%',
-				backgroundColor: 'purple',
-				color: 'white',
-				padding: '0.25em 0'
-			},
-			submitBtn: {
-				backgroundColor: 'purple', 
-				color: 'white',
-				width: 200,
-				marginBottom: 30,
-			},
-			billModal:{
-				main: {
-					position: 'absolute',
-					top: '50%',
-					left: '50%',
-					transform: 'translate(-50%, -50%)',
-					width: '80%'
-				},
-				heading:{
-					textAlign: 'center',
-					width: '100%',
-					backgroundColor: 'purple',
-					color: 'white',
-					padding: '0.25em 0'
-				},
-				item:{
-					textAlign: 'center',
-					padding: '1em 0'
-				}
-			}
-		}
 		
 
     return (
