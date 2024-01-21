@@ -37,7 +37,7 @@ function PendingRequests() {
 
   useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('http://localhost:8000/hospital/', {
+      const response = await fetch('https://blood-bank-back18.onrender.com/hospital/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function PendingRequests() {
 
   useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('http://localhost:8000/requests/pending_request/', {
+      const response = await fetch('https://blood-bank-back18.onrender.com/requests/pending_request/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

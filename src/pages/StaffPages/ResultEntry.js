@@ -46,7 +46,7 @@ function ResultEntry() {
 
   useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('http://localhost:8000/donors/', {
+      const response = await fetch('https://blood-bank-back18.onrender.com/donors/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ function ResultEntry() {
     }
 
 
-    let response = await fetch('http://localhost:8000/donations/', {
+    let response = await fetch('https://blood-bank-back18.onrender.com/donations/', {
       method: 'POST',
       headers: {
       'content-type': 'application/json',

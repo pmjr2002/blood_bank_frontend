@@ -49,7 +49,7 @@ function Donors() {
 
   useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('http://localhost:8000/donors/addresses', {
+      const response = await fetch('https://blood-bank-back18.onrender.com/donors/addresses', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ function Donors() {
     
     if(blood_group.slice(-1) === '+')
       blood_group = blood_group.replace('+','P')
-    let response = await fetch(`http://127.0.0.1:8000/donors/?locality=${locality}&blood_group=${blood_group}`)
+    let response = await fetch(`https://blood-bank-back18.onrender.com/donors/?locality=${locality}&blood_group=${blood_group}`)
 
     
     if(response.status === 200){
