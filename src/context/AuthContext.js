@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
         
         e.preventDefault()
 
-        let response = await fetch('http://127.0.0.1:8000/auth/',{
+        let response = await fetch('http://blood-bank-back.onrender.com/auth/',{
             method: 'POST',
             body: new URLSearchParams(
                 {

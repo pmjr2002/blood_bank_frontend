@@ -37,7 +37,7 @@ function RepositoryTable() {
 
 	useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('https://blood-bank-back18.onrender.com/repository/', {
+      const response = await fetch('https://blood-bank-back.onrender.com/repository/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
