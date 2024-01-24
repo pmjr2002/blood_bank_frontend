@@ -24,7 +24,7 @@ export const AuthProvider = ({children}) => {
                     'password': e.target.password.value
                 }
             )
-        })
+        });
 
         
         let data = await response.json()
