@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {Autocomplete, Paper, TextField,Button, Accordion,AccordionSummary, AccordionDetails} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
+import DeleteOutlined from '@mui/icons-material/DeleteOutlineOutlined'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Loader from '../../utils/SpinLoader'
 import DonorModal from './DonorModal'
+import { toast } from 'react-toastify'
 
 const style = {
   container: {
@@ -88,6 +90,31 @@ function Donors() {
       alert("Error " + response.status + " : " + response.statusText)
   }
 
+  let handleDelete = async (id) => {
+    
+    setisLoading(true)
+    let response = await fetch(`https://blood-bank-back.onrender.com/donors/${id}`, {
+      method: 'DELETE'
+    })
+    setisLoading(false)
+    if(response.status === 204){
+      setDonors((prevDonors) => prevDonors.filter((donor)=>donor.donor_id!==id))
+      toast.success("Deleted the donor successfully",{
+        position: "top-center",
+			  autoClose: 3000,
+			  hideProgressBar: false,
+			  closeOnClick: true,
+			  pauseOnHover: true,
+			  draggable: true,
+			  progress: undefined,
+			  theme: "light",
+      })
+    }
+    else{
+      alert("Error " + response.status + " : " + response.statusText)
+    }
+  }
+
   return (
     isLoading? <Loader/> :
   <div style = {style.container}>
@@ -144,10 +171,22 @@ function Donors() {
                 <h2>{donor.name} <span style = {{color: 'grey'}}>#{donor.donor_id}</span></h2>
               </AccordionSummary>
               <AccordionDetails>
-                <h4>Phone Number: {donor.phone}</h4>
-                <h4>Date of Birth: {donor.dob}</h4>
-                <h4>Blood Group: {donor.blood_group}</h4>
-                <h4>Address: {donor.address}</h4>
+                <div style={{'display':'flex', 'justifyContent':'space-between', 'alignItems':'center'}}>
+                  <ul>
+                    <h4>Phone Number: {donor.phone}</h4>
+                    <h4>Date of Birth: {donor.dob}</h4>
+                    <h4>Blood Group: {donor.blood_group}</h4>
+                    <h4>Address: {donor.address}</h4>
+                  </ul>
+                  <Button
+                    variant = "contained" 
+                    startIcon = {<DeleteOutlined />}
+                    onClick = {() => handleDelete(donor.donor_id)}
+                    size = 'medium' 
+                    sx = {{backgroundColor: 'purple', '&:hover': {backgroundColor: 'purple'}, height: '2rem'}}
+                  >Delete</Button>
+                </div>
+                
               </AccordionDetails>
             </Accordion>
         ))}

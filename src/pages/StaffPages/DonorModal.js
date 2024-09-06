@@ -88,12 +88,12 @@ function DonorModal() {
 	let handleSubmit = async(e) => {
     e.preventDefault()
 
-    let name = document.getElementsByTagName('input')[2].value
-    let gender = document.getElementsByTagName('input')[3].value
-    let dob = document.getElementsByTagName('input')[4].value
-    let blood_group = document.getElementsByTagName('input')[5].value
-    let phone = document.getElementsByTagName('input')[6].value
-    let address = document.getElementsByTagName('input')[7].value
+    let name = document.getElementsByTagName('input')[3].value
+    let gender = document.getElementsByTagName('input')[4].value
+    let dob = document.getElementsByTagName('input')[5].value
+    let blood_group = document.getElementsByTagName('input')[6].value
+    let phone = document.getElementsByTagName('input')[7].value
+    let address = document.getElementsByTagName('input')[8].value
 
     if(name === '' || gender === '' || dob === '' || blood_group === '' || phone === '' || address === ''){
       toast.warn('Please enter all the fields', {

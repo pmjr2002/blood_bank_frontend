@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import RequestCard from '../../components/RequestCard'
+import Loader from '../../utils/SpinLoader'
 
 const style = {
   container: {
@@ -34,6 +35,7 @@ function PendingRequests() {
   
   const [hospitals,setHospitals] = useState([])
   const [pendingRequests,setPendingRequests] = useState([])
+  const [isLoading, setisLoading] = useState(false)
 
   useEffect(() =>{
     async function fetchData(){
@@ -54,11 +56,13 @@ function PendingRequests() {
 
   useEffect(() =>{
     async function fetchData(){
+      setisLoading(true)
       const response = await fetch('https://blood-bank-back.onrender.com/requests/pending_request/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       }})
+      setisLoading(false)
       if(response.status === 200){
         const data = await response.json()
         setPendingRequests(data)
@@ -70,9 +74,10 @@ function PendingRequests() {
   }, [])
 
   return(
+    
     <div style = {style.container}>
       <h1 style = {style.mainHeading}>Pending Requests</h1>
-          {hospitals.map((hospital) => (
+          {isLoading? <Loader/> : hospitals.map((hospital) => (
           <div style = {style.outerContainer}>
               <h1 style = {{textAlign: 'center'}}>{hospital.name}</h1>
               <div style = {style.subContainer}>

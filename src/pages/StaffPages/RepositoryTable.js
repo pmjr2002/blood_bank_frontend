@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 
 import {Paper, Table, TableBody,TableCell, TableContainer, TableHead,TableRow} from '@mui/material'
+import Loader from '../../utils/SpinLoader'
 
 const style = {
   main: {
@@ -34,14 +35,17 @@ const style = {
 
 function RepositoryTable() {
 	const [blood, setBlood] = useState([])
+  const [isLoading, setisLoading] = useState(false)
 
 	useEffect(() =>{
     async function fetchData(){
+      setisLoading(true)
       const response = await fetch('https://blood-bank-back.onrender.com/repository/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       }})
+      setisLoading(false)
       if(response.status === 200){
         const data = await response.json()
         setBlood(data)
@@ -53,6 +57,7 @@ function RepositoryTable() {
   }, [])
 
   return (
+    isLoading? <Loader/> :
     <div style = {style.main}>
         <Paper style = {style.paper}elevation = {12}>
         <h1 style = {style.heading}>Repository</h1>
