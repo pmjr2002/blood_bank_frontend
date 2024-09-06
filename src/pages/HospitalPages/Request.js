@@ -2,6 +2,7 @@ import React,{useContext, useState, useEffect} from 'react'
 import AuthContext from '../../context/AuthContext'
 import {Paper, List, ListItem, ListItemText,Autocomplete,TextField, Button,Box, Modal} from '@mui/material'
 import {toast} from 'react-toastify'
+import Loader from '../../utils/SpinLoader'
 
 const items = [
 	{text: 'Case Type', options: ['Accident', 'Surgery','Malaria','Anaemia']},
@@ -64,6 +65,7 @@ function Request() {
   
 	const [params, setParams] = useState([])
 	const [hospital, setHospital] = useState([])
+	const [isLoading, setisLoading] = useState(false)
 
 	useEffect(() =>{
     async function fetchData(){
@@ -106,6 +108,7 @@ function Request() {
   }, [])
 
 	const handleSubmit = async() => {
+		setisLoading(true)
 		let response = await fetch('https://blood-bank-back.onrender.com/requests/', {
 			method: 'POST',
 			headers: {
@@ -120,7 +123,7 @@ function Request() {
 				'quantity': params[3]
 			})
 		})
-
+		setisLoading(false)
 		if(response.status === 201){
 			toast.success('Request generated successfully',{
 				position: 'top-center',
@@ -178,6 +181,7 @@ function Request() {
 		
 
     return (
+		isLoading? <Loader/> :
     <div style = {style.main}>
         <h1 style={style.heading}>Welcome {hospital.name} #{hospital.hospital_id}</h1>
         <Paper elevation = {12} style = {style.paper}>

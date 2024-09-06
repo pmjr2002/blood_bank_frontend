@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Autocomplete, Paper, TextField,Button, Accordion,AccordionSummary, AccordionDetails} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-
+import Loader from '../../utils/SpinLoader'
 import DonorModal from './DonorModal'
 
 const style = {
@@ -45,7 +45,8 @@ const style = {
 function Donors() {
   const [addresses, setAddresses] = useState([])
   const [donors, setDonors] = useState([])
-
+  const [isLoading, setisLoading] = useState(false)
+  const [name, setName] = useState('')
 
   useEffect(() =>{
     async function fetchData(){
@@ -65,6 +66,7 @@ function Donors() {
   }, [])
 
   let handleSearch = async(e) => {
+    
     e.preventDefault()
     
     let locality = document.getElementsByTagName('input')[0].value
@@ -72,10 +74,13 @@ function Donors() {
     
     if(blood_group.slice(-1) === '+')
       blood_group = blood_group.replace('+','P')
-    let response = await fetch(`https://blood-bank-back'https://blood-bank-back.onrender.com.onrender.com/donors/?locality=${locality}&blood_group=${blood_group}`)
+    setisLoading(true)
+    let response = await fetch(`https://blood-bank-back.onrender.com/donors/?locality=${locality}&blood_group=${blood_group}&name=${name}`)
 
+    setisLoading(false)
     
     if(response.status === 200){
+      setName('')
       let data = await response.json()
       setDonors(data)
     }
@@ -84,7 +89,7 @@ function Donors() {
   }
 
   return (
-
+    isLoading? <Loader/> :
   <div style = {style.container}>
     <div style = {style.searchContainer}>
       <Paper elevation = {10} style = {style.paper}>
@@ -114,6 +119,13 @@ function Donors() {
               "&.Mui-focused fieldset": {
                 borderColor: "pink",
               }}}}/>}/>
+        <TextField 
+          id = "name"
+          label = "Name of the donor"
+          value = {name}
+          sx = {{width : 300}}
+          onChange = {(e)=> setName(e.target.value)}
+        />
           <Button 
             variant = "contained" 
             endIcon = {<SearchIcon />}
@@ -125,7 +137,7 @@ function Donors() {
     </div>
     <div style = {style.accordion.container} >
       {donors.length !== 0 && donors.map((donor) =>  (
-            <Accordion style = {style.accordion.item}>
+            <Accordion key={donor.donor_id} style = {style.accordion.item}>
               <AccordionSummary
                 expandIcon = {<ExpandMoreIcon />}
                 id = {donor.donor_id}>

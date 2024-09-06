@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-
+import Loader from '../../utils/SpinLoader'
 import AuthContext from '../../context/AuthContext'
 
 import {toast} from 'react-toastify'
@@ -65,7 +65,7 @@ function DonorModal() {
   
 	const [addresses, setAddresses] = useState([])
   const [value, setValue] = useState(dayjs('2023-01-09'))
-
+	const [isLoading, setisLoading] = useState(false)
   const handleChange = (newValue) => setValue(newValue)
 
   useEffect(() =>{
@@ -109,6 +109,7 @@ function DonorModal() {
       return
     }
 
+	setisLoading(true)
     let response = await fetch('https://blood-bank-back.onrender.com/donors', {
       method: 'POST',
       headers: {
@@ -124,6 +125,7 @@ function DonorModal() {
         'address': address
       })
 })
+	setisLoading(false)
 	
 	if(response.status === 201){
 		toast.success("Donor Created Successfully",{
@@ -165,6 +167,7 @@ function DonorModal() {
   }
 
   return (
+	isLoading? <Loader/> :
     <div>
       <Modal
 			open = {open}

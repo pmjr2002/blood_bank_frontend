@@ -1,6 +1,7 @@
 import { createContext,useState} from "react"
 import jwt_decode from 'jwt-decode'
 import { useNavigate } from "react-router-dom"
+import Loader from '../utils/SpinLoader'
 
 const AuthContext = createContext()
 
@@ -9,13 +10,14 @@ export default AuthContext
 export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(null)
     let [user, setUser] = useState(null)
-    
+    const [isLoading, setisLoading] = useState(false)
+
     const navigate = useNavigate()
 
     let login = async (e) => {
         
         e.preventDefault()
-
+        setisLoading(true)
         let response = await fetch('https://blood-bank-back.onrender.com/auth/',{
             method: 'POST',
             body: new URLSearchParams(
@@ -25,7 +27,7 @@ export const AuthProvider = ({children}) => {
                 }
             )
         });
-
+        setisLoading(false)
         
         let data = await response.json()
 
@@ -60,7 +62,7 @@ export const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {isLoading? <Loader/> : children}
         </AuthContext.Provider>
     )
 }

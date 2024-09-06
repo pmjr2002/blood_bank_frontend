@@ -4,7 +4,7 @@ import {Autocomplete,
   Paper, Box,TextField,Button, ListItemText, List, ListItem } from '@mui/material'
 
 import AuthContext from '../../context/AuthContext'
-
+import Loader from '../../utils/SpinLoader'
 import {toast} from 'react-toastify'
 
 const style = {
@@ -43,6 +43,7 @@ function ResultEntry() {
   const {authTokens} = useContext(AuthContext)
 
   const [donors, setDonors] = useState([])
+    const [isLoading, setisLoading] = useState(false)
 
   useEffect(() =>{
     async function fetchData(){
@@ -91,7 +92,7 @@ function ResultEntry() {
       return
     }
 
-
+    setisLoading(true)
     let response = await fetch('https://blood-bank-back.onrender.com/donations/', {
       method: 'POST',
       headers: {
@@ -106,6 +107,8 @@ function ResultEntry() {
         'result': data4
       })
     })
+
+    setisLoading(false)
 
     if(response.status === 201){
       toast.success('Result added successfully', {
@@ -133,6 +136,7 @@ function ResultEntry() {
   }
 
   return (
+    isLoading? <Loader/> :
     <div style = {style.main}>
       <h1>Staff ID: {user.id}</h1>
       <Paper elevation = {12} style = {style.paper}>
