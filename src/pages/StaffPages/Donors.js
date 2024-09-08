@@ -84,6 +84,21 @@ function Donors() {
     if(response.status === 200){
       setName('')
       let data = await response.json()
+      if(data.length === 0){
+        toast.warn(
+          "No Donors found",
+          {
+            position: "top-center",
+			      autoClose: 3000,
+			      hideProgressBar: false,
+			      closeOnClick: true,
+			      pauseOnHover: true,
+			      draggable: true,
+			      progress: undefined,
+			      theme: "light",
+          }
+        )
+      }
       setDonors(data)
     }
     else
@@ -94,7 +109,11 @@ function Donors() {
     
     setisLoading(true)
     let response = await fetch(`https://blood-bank-back.onrender.com/donors/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      credentials : 'include'
     })
     setisLoading(false)
     if(response.status === 204){
@@ -150,7 +169,11 @@ function Donors() {
           id = "name"
           label = "Name of the donor"
           value = {name}
-          sx = {{width : 300}}
+          sx = {
+            {"& .MuiOutlinedInput-root": {
+              "&.Mui-focused fieldset": {
+                borderColor: "pink",
+              }}}}
           onChange = {(e)=> setName(e.target.value)}
         />
           <Button 

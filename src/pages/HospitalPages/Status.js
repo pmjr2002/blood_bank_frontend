@@ -2,6 +2,7 @@ import React, { useEffect,useState,useContext } from 'react'
 import RequestCard from '../../components/RequestCard'
 
 import AuthContext from '../../context/AuthContext'
+import Loader from '../../utils/SpinLoader'
 
 const style = {
   container:{
@@ -25,16 +26,19 @@ function Status() {
 
   const [pendingRequests, setPendingRequests] = useState([])
   const [successfulRequests, setSuccessfulRequests] = useState([])
+  const [pLoading, setpLoading] = useState(false)
+  const [sLoading, setsLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
+      setpLoading(true)
       const response = await fetch(`https://blood-bank-back.onrender.com/requests/pending_request/${user.id}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       })
-
+      setpLoading(false)
       if(response.status === 200){
         const data = await response.json()
         setPendingRequests(data)
@@ -47,13 +51,14 @@ function Status() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setsLoading(true)
       const response = await fetch(`https://blood-bank-back.onrender.com/requests/successful_request/${user.id}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
       })
-
+      setsLoading(false)
       if(response.status === 200){
         const data = await response.json()
         setSuccessfulRequests(data)
@@ -69,7 +74,7 @@ function Status() {
       <div>
         <h1 style = {{textAlign: 'center'}}>Pending Requests</h1>
         <div style = {style.subContainer}>
-          {pendingRequests.length !== 0 &&
+          {pLoading? <Loader/> : pendingRequests.length !== 0 &&
             pendingRequests.map((request) =>(
               <RequestCard
                 request_id = {request.request_id}
@@ -86,7 +91,7 @@ function Status() {
       <div>
         <h1 style = {{textAlign: 'center'}}>Successful Requests</h1>
         <div style = {style.subContainer}>
-          {successfulRequests.length !== 0 &&
+          {sLoading? <Loader/> : successfulRequests.length !== 0 &&
             successfulRequests.map((request) =>(
               <RequestCard
                 request_id = {request.request_id}
