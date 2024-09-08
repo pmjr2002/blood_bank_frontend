@@ -8,6 +8,7 @@ import ResultEntry from './ResultEntry'
 import RepositoryTable from './RepositoryTable'
 
 import AuthContext from '../../context/AuthContext'
+import Hospitals from './Hospitals'
 
 
 const style = {
@@ -48,6 +49,10 @@ function StaffPages() {
 		{
 			text: 'Repository',
 			path: `/staff/${user.id}/repository/`
+		},
+		{
+			text: 'Hospitals',
+			path: `/staff/${user.id}/hospitals/`
 		}
 	]
 
@@ -96,6 +101,7 @@ function StaffPages() {
 					<Route path = '/result-entry' element = {<ResultEntry/>}/>
 					<Route path = '/pending-requests' element = {<PendingRequests/>}/>
 					<Route path = '/repository' element = {<RepositoryTable/>}/>
+					<Route path = '/hospitals' element = {<Hospitals/>}/>
 				</Routes>
 			</Box>
     </div>
