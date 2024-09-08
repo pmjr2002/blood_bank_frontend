@@ -31,7 +31,7 @@ const style = {
         padding: '2em',
         gap: '1.5em',
         listStyleType : 'none',
-        marginLeft : '82px'
+        marginLeft : '52px'
     },
     item:{
         textAlign: 'center',

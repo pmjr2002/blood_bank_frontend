@@ -64,29 +64,6 @@ function HospitalModal() {
 	const [password, setPassword] = useState('')
 	const [isLoading, setisLoading] = useState(false)
 
-	const [addresses, setAddresses] = useState([])
-	const [value, setValue] = useState(dayjs('2023-01-09'))
-
-	const handleChange = (newValue) => setValue(newValue)
-
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('https://blood-bank-back.onrender.com/donors/addresses', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				}
-			})
-			if (response.status === 200) {
-				const data = await response.json()
-				setAddresses(data)
-			} else {
-				console.log("Error " + response.status + " : " + response.statusText)
-			}
-		}
-		fetchData()
-	}, [])
-
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
