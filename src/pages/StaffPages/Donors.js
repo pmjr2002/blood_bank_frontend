@@ -111,7 +111,9 @@ function Donors() {
     let response = await fetch(`https://blood-bank-back.onrender.com/donors/${id}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type' : 'application/json'
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Origin': 'https://blood-bank-front.onrender.com',
+        'Access-Control-Allow-Credentials' : 'true'
       },
       credentials : 'include'
     })
