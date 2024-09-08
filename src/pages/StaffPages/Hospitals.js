@@ -81,7 +81,7 @@ function Hospitals() {
     const fetchHospitals = async () => {
         setisLoading(true)
         try {
-            const response = await fetch('https://blood-bank-back.onrender.com/hospital/', {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}/hospital/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

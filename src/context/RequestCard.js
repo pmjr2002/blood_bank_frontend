@@ -34,7 +34,7 @@ const style = {
 
 function RequestCard(props) {
   let handlePendingClick = async() => {
-    let response = await fetch(`https://blood-bank-back.onrender.com/requests/pending_request_process/${props.request_id}`)
+    let response = await fetch(`${process.env.REACT_APP_BASE_URL}/requests/pending_request_process/${props.request_id}`)
     
     if(response.status === 200){
       toast.success('Blood request #' + props.request_id + ' successful!',{

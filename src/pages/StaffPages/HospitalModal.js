@@ -84,7 +84,7 @@ function HospitalModal() {
 
 		setisLoading(true)
 
-		let response = await fetch('https://blood-bank-back.onrender.com/hospital/', {
+		let response = await fetch(`${process.env.REACT_APP_BASE_URL}/hospital/`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

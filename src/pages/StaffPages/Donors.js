@@ -52,7 +52,7 @@ function Donors() {
 
   useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('https://blood-bank-back.onrender.com/donors/addresses', {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/donors/addresses`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function Donors() {
     if(blood_group.slice(-1) === '+')
       blood_group = blood_group.replace('+','P')
     setisLoading(true)
-    let response = await fetch(`https://blood-bank-back.onrender.com/donors/?locality=${locality}&blood_group=${blood_group}&name=${name}`)
+    let response = await fetch(`${process.env.REACT_APP_BASE_URL}/donors/?locality=${locality}&blood_group=${blood_group}&name=${name}`)
 
     setisLoading(false)
     
@@ -108,7 +108,7 @@ function Donors() {
   let handleDelete = async (id) => {
     
     setisLoading(true)
-    let response = await fetch(`https://blood-bank-back.onrender.com/donors/${id}`, {
+    let response = await fetch(`${process.env.REACT_APP_BASE_URL}/donors/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type' : 'application/json',

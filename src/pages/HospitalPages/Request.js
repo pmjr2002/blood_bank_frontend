@@ -69,7 +69,7 @@ function Request() {
 
 	useEffect(() =>{
     async function fetchData(){
-      const response = await fetch(`https://blood-bank-back.onrender.com/hospital/${user.id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/hospital/${user.id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ function Request() {
 	const [prices, setPrices] = useState([])
 	useEffect(() =>{
     async function fetchData(){
-      const response = await fetch('https://blood-bank-back.onrender.com/requests/blood_rate', {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/requests/blood_rate`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ function Request() {
 
 	const handleSubmit = async() => {
 		setisLoading(true)
-		let response = await fetch('https://blood-bank-back.onrender.com/requests/', {
+		let response = await fetch(`${process.env.REACT_APP_BASE_URL}/requests/`, {
 			method: 'POST',
 			headers: {
 			'content-type': 'application/json',

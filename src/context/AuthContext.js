@@ -18,7 +18,7 @@ export const AuthProvider = ({children}) => {
         
         e.preventDefault()
         setisLoading(true)
-        let response = await fetch('https://blood-bank-back.onrender.com/auth/',{
+        let response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/`,{
             method: 'POST',
             body: new URLSearchParams(
                 {
